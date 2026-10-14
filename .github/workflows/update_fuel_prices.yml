@@ -1,0 +1,22 @@
+name: Update fuel prices
+on:
+  schedule:
+    - cron: "30 7 * * *"
+  workflow_dispatch:
+jobs:
+  update_price:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.14"
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Run script
+      run: python prezzi_fomrato_python.py
+      env:
+        TELEGRAM_BOT: ${{ secrets.TELEGRAM_BOT }}
+        CHAT_ID: ${{ secrets.CHAT_ID }}
