@@ -16,7 +16,7 @@ jobs:
     - name: Install dependencies
       run: pip install -r requirements.txt
     - name: Run script
-      run: python prezzi_fomrato_python.py
+      run: python prezzi_carburante.py
       env:
         TELEGRAM_BOT: ${{ secrets.TELEGRAM_BOT }}
         CHAT_ID: ${{ secrets.CHAT_ID }}
