@@ -115,7 +115,7 @@ for numero, riga in primi_5.iterrows():
     testo+=f"{i})PREZZO: {riga["prezzo"]} € - Distanza: {riga["distanza"]} km - Comune: {riga["Comune"]} - Bandiera: {riga["Bandiera"]} - Indirizzo: {riga["Indirizzo"]} - Data comunicazione: {riga["dtComu"]}\n"
 
 # %%
-path_env=Path.home()/ "Secret" / ".env"
+path_env=Path.home()/"Secret"/".env"
 load_dotenv(dotenv_path=path_env)
 telegram_bot=os.environ.get("TELEGRAM_BOT")
 chat_id=os.environ.get("CHAT_ID")
@@ -130,5 +130,3 @@ except requests.exceptions.HTTPError:
     logging.warning(f"Errore token/chat id: {send_message.status_code}")
 except requests.exceptions.RequestException as error:
     logging.warning(f"Errore: {type(error).__name__}")
-
-
