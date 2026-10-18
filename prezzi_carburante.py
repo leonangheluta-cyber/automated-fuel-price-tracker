@@ -11,7 +11,9 @@ import logging
 CARTELLA=os.path.dirname(os.path.abspath(__file__))
 PERCORSO_LOG=os.path.join(CARTELLA, "script_prezzi_carburante.log")
 PERCORSO_CSV=os.path.join(CARTELLA, "anagrafica_impianti_attivi_ok.csv")
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s", filename=PERCORSO_LOG)
+handlers=[logging.StreamHandler(), logging.FileHandler(PERCORSO_LOG)]
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s", handlers=handlers)
+
 
 # %%
 url_prezzi="https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv"
