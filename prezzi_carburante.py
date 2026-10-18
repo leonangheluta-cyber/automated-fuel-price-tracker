@@ -19,8 +19,8 @@ logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(
 url_prezzi="https://www.mimit.gov.it/images/exportCSV/prezzo_alle_8.csv"
 url_impianti="https://www.mimit.gov.it/images/exportCSV/anagrafica_impianti_attivi.csv"
 try:
-    richiesta_prezzi=requests.get(url_prezzi, timeout=15)
-    richiesta_impianti=requests.get(url_impianti, timeout=15)
+    richiesta_prezzi=requests.get(url_prezzi, timeout=60)
+    richiesta_impianti=requests.get(url_impianti, timeout=60)
     richiesta_impianti.raise_for_status()
     richiesta_prezzi.raise_for_status()
 except requests.exceptions.RequestException as error:
