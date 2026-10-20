@@ -124,15 +124,16 @@ i=0
 for number, row in best_five_prices.iterrows():
     i+=1
     text+=f"{i}) PREZZO: {row["prezzo"]} € - Distanza: {row["distanza"]} km - Comune: {row["Comune"]} - Bandiera: {row["Bandiera"]} - Indirizzo: {row["Indirizzo"]} - Data comunicazione: {row["dtComu"]}\n"
+    text=text.replace("- -", "")
 # %%
 try:
-    if discarde_for_telegram:
-        send_discarded_prices=requests.get(url, params={"chat_id": chat_id, "text": discarde_for_telegram}, timeout=10)
-        send_discarded_prices.raise_for_status()
     send_message=requests.get(url, params={"chat_id": chat_id, "text": text}, timeout=10)
     send_message.raise_for_status()
     logging.info("Messaggio partito")
+    if discarde_for_telegram:
+        send_discarded_prices=requests.get(url, params={"chat_id": chat_id, "text": discarde_for_telegram}, timeout=10)
+        send_discarded_prices.raise_for_status()
 except requests.exceptions.HTTPError as error:
-    logging.warning(f"HTTP error: {type(error).response}")
+    logging.warning(f"HTTP error: {error.response.status_code}")
 except requests.exceptions.RequestException as error:
     logging.warning(f"Errore: {type(error).__name__}")
