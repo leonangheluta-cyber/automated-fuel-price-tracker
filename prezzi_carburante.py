@@ -37,7 +37,10 @@ facilities_lines=facilities_text.splitlines()
 # %%
 with open(CSV_PATH, "w", encoding="utf-8") as writer:
     for number, row in enumerate(facilities_lines, start=1):
-        row=row.replace(" | gestori.prezzibenzina.it", "")
+        if "|| gestori.prezzibenzina.it" in row:
+            row = row.replace("|| gestori.prezzibenzina.it", "")
+        if "| gestori.prezzibenzina.it" in row:
+            row = row.replace("| gestori.prezzibenzina.it", "")
         if number==1:
             continue
         writer.write(row + "\n")   
